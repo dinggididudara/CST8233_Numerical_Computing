@@ -10,7 +10,7 @@ names(my_df)                             # list columns' name
 my_df_temp <- my_df %>% select(Temp,Month)  # select temperature column
 
 my_df_temp %>%
-  group_by(Month) %>% filter(Month==6 | Month==7 | Month==8)%>%      s# Temp mean in June, July and August
+  group_by(Month) %>% filter(Month==6 | Month==7 | Month==8)%>%      # Temp mean in June, July and August
    summarise(mean = mean(Temp), median = median(Temp), standard_deviation = sd(Temp))     
 
 May_To_Sep <- my_df_temp %>%
