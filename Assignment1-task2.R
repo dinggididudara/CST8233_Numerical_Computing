@@ -13,6 +13,9 @@ y <- c(0,-1.921, 0, 3.584, 0, -6.718, 0)
 
 MyIntCal <- approxfun(x,y)    # create interpolating function
 
+lag <- lagrange(x,y)          # find derivation
+deriv(lag)
+
 pdf(file="Lab\\MyIntFig.pdf", width=4, height=2) # create 4 x 2 figure and
 plot(x, y)      
 curve(MyIntCal,add=TRUE)
