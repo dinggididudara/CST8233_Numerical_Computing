@@ -2,7 +2,7 @@
 # x^3-3*x^2-2*x+7
 library("PolynomF")
 p <- PolynomF::polynom(c(7,-2,-3,1))
-class(p)  # class of the variable p is polynom
+class(p)  # class of the variable p is polynomial
 coef(p)   # find coefficients 7,-2,-3,1
 
 # y^2+2y
