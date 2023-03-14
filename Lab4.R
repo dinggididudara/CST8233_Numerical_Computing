@@ -1,28 +1,43 @@
 # Soomin Lee 040899389 CST8233 304
 # Lab 4
-library(dplyr)
-f(x) <- log(1+x)
+f <- function(x){log(1+x)}
+f_6 <- function(x){return(x-x^2/2+x^3/3-x^4/4+x^5/5-x^6/6)}
 
-# write first six terms of this series
-for(n in 1 : 6){
-  f_6(x) <- exp(-1,n) * x^(n+1) / (n+1)
+userInput_f <- function(){
+  userInput_x <- readline(prompt = "Enter x: ")
+  userInput_x <- as.numeric(userInput_x)
+  return (userInput_x)
 }
 
 # plot f(x) and f_6(x)
-plot(f(x))
-plot(f_6(x))
+curve(f, from=0, to=2)
+curve(f_6, from=0, to=2, col="red", add=TRUE)
 
-# take the value of x from user (using for loop)
-# find absolute and relative error and print
-count <- 0
-print("n   x   approx_x          Absolute error    Relative error")
-print("------------------------------------------------------------")
-for(i in 1:10){
-  count <- count + 1
-  userInput_X <- readline('Enter x (xx.x) :')
-  userInput_X <- as.numeric(userInput_X)
-  userInput_n <- readline('Enter n (x) : ')
-  userInput_n <- as.numeric(userInput_n)
-  
-  print(count + "  " + userInput_X + " " + "  " + " ")
+# Maclaurin series
+f_Maclaurin <- function(x,n){
+  temp <- 0
+  for(i in 0:n){
+    temp <- temp + (-1)^i * (x^(i+1)/(i+1))
+  }
+  return(temp)
 }
+
+# take the value of x from user
+userInput_x <- userInput_f()
+# userInput_x <- 0.32
+# find absolute and relative error and print
+for(n in 1:10){
+   x <- userInput_x
+  true_value <- f(x)
+  approx <- f_Maclaurin(x,n)
+  abs_err <- abs(true_value - approx)
+  rel_err <- abs_err/ abs(true_value)
+  
+  if(n==1){
+    cat("n     x       approx_x   Absolute error   Relative error\n")
+    cat("---------------------------------------------------------\n")
+  }
+  cat(sprintf("%-4d %-8.2f %-12.6f %-12.6f %-12.6f\n",
+              n, x, approx, abs_err, rel_err))
+}
+
