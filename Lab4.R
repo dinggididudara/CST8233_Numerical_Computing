@@ -16,7 +16,7 @@ curve(f_6, from=0, to=2, col="red", add=TRUE)
 # Maclaurin series
 f_Maclaurin <- function(x,n){
   temp <- 0
-  for(i in 0:n){
+  for(i in 0:(n-1)){
     temp <- temp + (-1)^i * (x^(i+1)/(i+1))
   }
   return(temp)
@@ -26,18 +26,20 @@ f_Maclaurin <- function(x,n){
 userInput_x <- userInput_f()
 # userInput_x <- 0.32
 # find absolute and relative error and print
-for(n in 1:10){
+for(n in 0:10){
    x <- userInput_x
   true_value <- f(x)
   approx <- f_Maclaurin(x,n)
   abs_err <- abs(true_value - approx)
   rel_err <- abs_err/ abs(true_value)
   
-  if(n==1){
-    cat("n     x       approx_x   Absolute error   Relative error\n")
-    cat("---------------------------------------------------------\n")
+  if(n==0){
+    cat("n     x    true_value    approx_x   Absolute error   Relative error\n")
+    cat("-------------------------------------------------------------------\n")
   }
-  cat(sprintf("%-4d %-8.2f %-12.6f %-12.6f %-12.6f\n",
-              n, x, approx, abs_err, rel_err))
+  else {
+    cat(sprintf("%-4d %-6.2f %-12.6f %-12.6f %-12.6f %-20.6f\n",
+              n, x, true_value, approx, abs_err, rel_err))
+  }
 }
 
